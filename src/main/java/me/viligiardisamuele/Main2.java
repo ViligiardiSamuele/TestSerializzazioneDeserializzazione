@@ -1,15 +1,27 @@
 package me.viligiardisamuele;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class Main2 {
-    public static void main(String[] args) throws StreamReadException, DatabindException, IOException {
-        Classe c2 = new XmlMapper().readValue(new File("test.xml"), Classe.class);
-        System.out.println("c2: " + c2.aula + " - " + c2.numero + " - " + c2.sezione);
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket("localhost", 8080);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String input = in.readLine();
+            ObjectMapper objectMapper = new ObjectMapper();
+            Classe c1 = objectMapper.readValue(input, Classe.class);
+            System.out.println(c1.toString());
+
+            socket.close();
+            in.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }

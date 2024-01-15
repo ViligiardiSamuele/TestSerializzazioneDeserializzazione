@@ -38,4 +38,11 @@ public class Alunno {
     public void setDataNascita(Date nascita) {
         this.dataNascita = nascita;
     }
+
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + " - " +
+        "Cognome: " + this.cognome + " - " +
+        "DataNascita: " + this.dataNascita.toString();
+    }
 }

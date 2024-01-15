@@ -49,4 +49,15 @@ public class Classe {
         this.alunni = alunni;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Numero: " + this.numero + "\n")
+        .append("Sezione: " + this.sezione + "\n")
+        .append("Aula: " + this.aula + "\n");
+
+        for (Alunno alunno : alunni)
+            sb.append(alunno.toString() + "\n");
+        return sb.toString();
+    }
 }
